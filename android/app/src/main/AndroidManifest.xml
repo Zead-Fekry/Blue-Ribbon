@@ -1,4 +1,6 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android">
+    <uses-permission android:name="android.permission.INTERNET"/>
+
     <application
         android:label="news_letter_app"
         android:name="${applicationName}"
@@ -40,6 +42,7 @@
         <meta-data
             android:name="flutterEmbedding"
             android:value="2" />
+        <uses-library android:name="org.apache.http.legacy" android:required="false"/>
     </application>
     <!-- Required to query activities that can process text, see:
          https://developer.android.com/training/package-visibility and
