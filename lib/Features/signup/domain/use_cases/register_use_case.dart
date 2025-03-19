@@ -8,7 +8,7 @@ import '../repositories/register_repository.dart';
 class RegisterUseCase{
 
   final RegisterRepository repository;
-  RegisterUseCase(this.repository);
+  RegisterUseCase({required  this.repository});
 
 
   Future<Either<Failure,User?>> execute(RegisterRequestBody requestBody) async{

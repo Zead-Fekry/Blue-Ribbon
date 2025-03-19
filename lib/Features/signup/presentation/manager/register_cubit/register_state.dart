@@ -1,12 +1,15 @@
 part of 'register_cubit.dart';
 
 @immutable
-sealed class RegisterState {}
-
-final class RegisterInitial extends RegisterState
+sealed class RegisterState extends Equatable
 {
   @override
   List<Object?> get props => [];
+}
+
+final class RegisterInitial extends RegisterState
+{
+
 }
 
 class RegisterLoading extends RegisterState{
