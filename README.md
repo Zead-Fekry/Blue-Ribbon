@@ -1,4 +1,4 @@
-![Screenshot_20250321-010134](https://github.com/user-attachments/assets/f50ed320-9b2e-47cb-8f70-48a51a536e8f)📩 Newsletter App
+📩 Newsletter App
 A Flutter-based Newsletter Application that allows users to sign up, choose their interests, and receive personalized newsletter content dynamically. This app integrates Firebase for authentication, database storage, and deep linking.
 
 ✨ Features
@@ -18,6 +18,7 @@ Database/Storage	Firebase Firestore
 State Management	Riverpod / Provider / Bloc
 Content Fetching	NewsAPI or custom JSON API
 📸 Screenshots
+
  ![Screenshot_20250321-005953](https://github.com/user-attachments/assets/a83ec8fd-206b-4e2c-b793-0842904ce0c9)
 ![Screenshot_20250321-005947](https://github.com/user-attachments/assets/9864105a-8aae-428f-8d24-2f8e5beace3f)
 ![Screenshot_20250321-005938](https://github.com/user-attachments/assets/d76e87eb-3509-4baa-8413-17f4d5c5d38b)
