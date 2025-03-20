@@ -5,7 +5,6 @@ import 'package:shimmer/shimmer.dart';
 import '../../../../core/routing/routes.dart';
 import '../../../../core/styles/colors/app_colors.dart';
 import '../Widgets/profile.dart';
-import '/injection_container.dart' as di;
 import '../Widgets/NewsListWidget.dart';
 
 class NewsScreen extends StatefulWidget {
@@ -25,61 +24,72 @@ class _NewsScreenState extends State<NewsScreen> {
     NewsCubit.get(context).getAllNewsOrRefresh(interests: widget.interests);
   }
 
+  Future<bool> _onWillPop() async {
+    Navigator.pushNamedAndRemoveUntil(
+      context,
+      Routes.loginScreen,
+          (route) => false,
+    );
+    return false;
+  }
+
   @override
   Widget build(BuildContext context) {
     final cubit = NewsCubit.get(context);
-    return Scaffold(
-      appBar: AppBar(
-        leading: IconButton(
+    return WillPopScope(
+      onWillPop: _onWillPop,
+      child: Scaffold(
+        appBar: AppBar(
+          leading: IconButton(
             onPressed: () => Navigator.pushNamedAndRemoveUntil(
-                  context,
-                  Routes.loginScreen,
+              context,
+              Routes.loginScreen,
                   (route) => false,
-                ),
-            icon: Icon(Icons.logout)),
-        title: Row(
-          children: [
-            Text("Latest News"),
-            IconButton(
-                onPressed: () => {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => Profile(
-                                  Userid: widget.UserId,
-                                )),
-                      )
-                    },
-                icon: Icon(Icons.person))
-          ],
-        ),
-        backgroundColor: AppColors.mainBlue,
-      ),
-      body: Padding(
-        padding: const EdgeInsets.all(10.0),
-        child: BlocBuilder<NewsCubit, NewsState>(
-          builder: (context, state) {
-            if (state is LoadingNewsState) {
-              return _buildShimmerList();
-            } else if (state is LoadedNewsState) {
-              return RefreshIndicator(
-                onRefresh: () => _onRefresh(context, cubit, widget.interests),
-                child: NewsListWidget(news: state.news),
-              );
-            } else if (state is ErrorNewsState) {
-              return RefreshIndicator(
-                onRefresh: () => _onRefresh(context, cubit, widget.interests),
-                child: Center(
-                  child: Text(
-                    state.message,
-                    textAlign: TextAlign.center,
-                    style: TextStyle(fontSize: 18, color: Colors.red),
+            ),
+            icon: Icon(Icons.logout),
+          ),
+          title: Row(
+            children: [
+              Text("Latest News"),
+              IconButton(
+                onPressed: () => Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => Profile(Userid: widget.UserId),
                   ),
                 ),
-              );
-            }
-            return const Center(child: CircularProgressIndicator());
-          },
+                icon: Icon(Icons.person),
+              )
+            ],
+          ),
+          backgroundColor: AppColors.mainBlue,
+        ),
+        body: Padding(
+          padding: const EdgeInsets.all(10.0),
+          child: BlocBuilder<NewsCubit, NewsState>(
+            builder: (context, state) {
+              if (state is LoadingNewsState) {
+                return _buildShimmerList();
+              } else if (state is LoadedNewsState) {
+                return RefreshIndicator(
+                  onRefresh: () => _onRefresh(context, cubit, widget.interests),
+                  child: NewsListWidget(news: state.news),
+                );
+              } else if (state is ErrorNewsState) {
+                return RefreshIndicator(
+                  onRefresh: () => _onRefresh(context, cubit, widget.interests),
+                  child: Center(
+                    child: Text(
+                      state.message,
+                      textAlign: TextAlign.center,
+                      style: TextStyle(fontSize: 18, color: Colors.red),
+                    ),
+                  ),
+                );
+              }
+              return const Center(child: CircularProgressIndicator());
+            },
+          ),
         ),
       ),
     );

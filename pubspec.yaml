@@ -50,6 +50,7 @@ dependencies:
   step_progress_indicator: ^1.0.2
   animate_gradient: ^0.0.2+1
   flutter_native_splash: ^2.3.6
+  google_sign_in: ^6.3.0
   dartz: ^0.10.1
   panara_dialogs: ^0.1.5
   get_it: ^7.6.7
