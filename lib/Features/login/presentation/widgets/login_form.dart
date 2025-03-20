@@ -4,6 +4,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
  import '../../../../core/shared-widgets/App_textfield.dart';
 import '../../../../core/shared-widgets/spacing.dart';
 import '../../../../core/utlis/app_regx.dart';
+import '../manager/login_cubit.dart';
+import 'login_button_consumer.dart';
 
 
 class LoginForm extends StatefulWidget {
@@ -14,14 +16,8 @@ class LoginForm extends StatefulWidget {
 }
 
 class _LoginFormState extends State<LoginForm> {
+
   @override
-  Widget build(BuildContext context) {
-
-   return SizedBox();
-  }
-
-
- /* @override
   void dispose() {
     super.dispose();
   }
@@ -44,7 +40,7 @@ class _LoginFormState extends State<LoginForm> {
               return null;
             },
             controller: context.watch<LoginCubit>().emailController,
-            title: LocaleKeys.email_txt.tr(),
+            title: "Email",
             fn: (p0) {
               if(LoginCubit.get(context).formKey.currentState!.validate()) {
                 LoginCubit.get(context).loginWithEmailAndPassword();
@@ -61,7 +57,7 @@ class _LoginFormState extends State<LoginForm> {
               return null;
             },
             controller: context.watch<LoginCubit>().passwordController,
-            title: LocaleKeys.password_txt.tr(),
+            title: "Password",
             isPassword: true,
             fn: (p0) {
               if(LoginCubit.get(context).formKey.currentState!.validate()) {
@@ -74,5 +70,5 @@ class _LoginFormState extends State<LoginForm> {
         ],
       ),
     );
-  }*/
+  }
 }

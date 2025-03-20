@@ -9,10 +9,5 @@ class RegisterRequestBodyModel extends RegisterRequestBody {
 
       });
 
-  Map<String, dynamic> toJson() => {
-    'name': name,
-    'email': email,
-    'password': password,
 
-  };
 }

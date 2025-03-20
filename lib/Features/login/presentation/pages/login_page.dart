@@ -37,27 +37,6 @@ class LoginPage extends StatelessWidget {
                         style: TextStyles.font32BlueBold(context),
                       ),
                     ),
-               /*     Positioned(    //darkmode zead
-                      top: 10,
-                      left:   null  ,
-                      right:   10  ,
-                      child: toolTipBtn(
-                        context: context,
-                        fn: () {
-                          if (context.locale.languageCode == 'ar') {
-                            context.setLocale(const Locale('en', 'US'));
-                          } else {
-                            context.setLocale(const Locale('ar', 'EG'));
-                          }
-                        },
-                        activeIdx: 1,
-                        iconName: "assets/images/public (1).svg",
-                        message: context.locale.languageCode == "en"
-                            ? "تحويل للعربية"
-                            : "Translate to English",
-                      ),
-                    ),*/
-
                   ],
                 ),
                 const SizedBox(
@@ -88,20 +67,5 @@ class LoginPage extends StatelessWidget {
       ),
     );
   }
-  /*Widget toolTipBtn(           //dark mode
-      {required String message,
-        required VoidCallback fn,
-        required String iconName,
-        required int activeIdx , required BuildContext context}) =>
-      Tooltip(
-        message: message,
-        child: InkWell(
-          onTap: fn,
-          child: SvgPicture.asset(
-            iconName,
-            width: 5 * MediaQuery.of(context).size.width * 0.005,
-            height: 5 * MediaQuery.of(context).size.height * 0.005,
-          ),
-        ),
-      );*/
+
 }

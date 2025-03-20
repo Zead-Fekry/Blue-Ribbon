@@ -5,7 +5,8 @@ import 'package:flutter/services.dart';
 import 'package:news_letter_app/core/routing/routes.dart';
 
 import '../../Features/login/presentation/pages/login.dart';
- import '../../Features/signup/presentation/pages/register_page.dart';
+ import '../../Features/news/presentation/screens/News.dart';
+import '../../Features/signup/presentation/pages/register_page.dart';
 import '../../Features/signup/presentation/widgets/Interest_Selection.dart';
 import '../shared-widgets/splash.dart';
 
@@ -20,6 +21,10 @@ Route generateRoute(RouteSettings settings)
       return MaterialPageRoute(
         builder: (context) => const Scaffold(),
       );
+    case "/start":
+      return MaterialPageRoute(
+        builder: (context) => const Login(),
+      );
     case Routes.loginScreen:
       return MaterialPageRoute(
         builder: (context) => const Login(),
@@ -32,6 +37,12 @@ Route generateRoute(RouteSettings settings)
     case Routes.signUpScreen:
       return MaterialPageRoute(
         builder: (context) => const RegisterPage(),
+      );
+    case Routes.NewsScreen:
+      final arguments = settings.arguments as Map<String, dynamic>;
+      return MaterialPageRoute(
+        builder: (context) => NewsScreen(interests: arguments["interests"],
+          UserId: arguments["userId"],),
       );
     case Routes.InterstSelection:
       return MaterialPageRoute(

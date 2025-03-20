@@ -26,7 +26,7 @@ class RegisterRemoteDataSourceImpWithDio implements RegisterRemoteDataSource {
         if (navigatorKey.currentContext != null) {
           Navigator.pushReplacementNamed(navigatorKey.currentContext!, Routes.InterstSelection,arguments:userCredential.user);
         }      }
-      return userCredential.user; // Always return, even if it's null
+      return userCredential.user;
     } on FirebaseAuthException catch (e) {
       if(e.code=="email-already-in-use") {
         throw RepeatedEmailException();

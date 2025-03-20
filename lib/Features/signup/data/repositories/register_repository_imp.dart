@@ -31,17 +31,11 @@ class RegisterRepositoryImpl implements RegisterRepository{
           password: requestBody.password,
           name: requestBody.name,
         );
-        // print(requestBodyModel.toJson());
 
         final responseBody = await remoteDataSource.register(requestBodyModel);
         return Right(responseBody);
       } catch(error) {
-
-         if(error is RepeatedPhoneNumberException){
-          return Left(RepeatedPhoneNumberFailure());
-
-        }
-        else if(error is RepeatedEmailException){
+        if(error is RepeatedEmailException){
           return Left(RepeatedEmailFailure());
 
         }

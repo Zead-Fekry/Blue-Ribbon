@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-
 import '../../data/models/news.dart';
+ import 'NewsDetails.dart';
 
 class NewsListWidget extends StatelessWidget {
   final List<NewsArticle> news;
@@ -20,13 +20,19 @@ class NewsListWidget extends StatelessWidget {
           shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
           child: ListTile(
             contentPadding: const EdgeInsets.all(10),
-            leading: article.urlToImage.isNotEmpty
-                ? ClipRRect(
-              borderRadius: BorderRadius.circular(8),
-              child: Image.network(article.urlToImage, width: 80, height: 80, fit: BoxFit.cover),
-            )
-                : const Icon(Icons.image_not_supported, size: 80),
-            title: Text(article.title, maxLines: 2, overflow: TextOverflow.ellipsis, style: TextStyle(fontWeight: FontWeight.bold)),
+            leading: Hero(
+              tag: article.urlToImage, // Unique tag for smooth transition
+              child: ClipRRect(
+                borderRadius: BorderRadius.circular(8),
+                child: Image.network(article.urlToImage, width: 80, height: 80, fit: BoxFit.cover),
+              ),
+            ),
+            title: Text(
+              article.title,
+              maxLines: 2,
+              overflow: TextOverflow.ellipsis,
+              style: TextStyle(fontWeight: FontWeight.bold),
+            ),
             subtitle: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -39,7 +45,12 @@ class NewsListWidget extends StatelessWidget {
               ],
             ),
             onTap: () {
-              // Handle news article click (e.g., open in WebView)
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => NewsDetailScreen(article: article),
+                ),
+              );
             },
           ),
         );

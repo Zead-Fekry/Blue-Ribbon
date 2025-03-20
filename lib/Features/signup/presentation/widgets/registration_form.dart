@@ -87,7 +87,7 @@ class _RegistrationFormState extends State<RegistrationForm> {
                     return   'Password must contain at least 1 Upper character'
                        ;
                   } else if (!AppRegex.hasMinLength(value)) {
-                    return   'Password length must be at least 6'
+                    return   'Password length must be at least 8'
                       ;
                   } else {
                     return null;

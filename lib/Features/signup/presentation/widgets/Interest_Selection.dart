@@ -16,15 +16,15 @@ class InterestSelectionScreen extends StatefulWidget {
 }
 
 class _InterestSelectionScreenState extends State<InterestSelectionScreen> {
-  List<String> interests = ["Apple", "Tesla", "Business", "WallStreetMarket"];
+  List<String> interests = ["Apple", "Business", "WallStreetMarket"];
   List<String> selectedInterests = [];
-  bool isLoading = false; // Track loading state
+  bool isLoading = false;
 
   void _saveInterests() async {
     if (isLoading) return;
 
     setState(() {
-      isLoading = true; // Show loading indicator
+      isLoading = true;
     });
 
     try {
@@ -43,18 +43,29 @@ class _InterestSelectionScreenState extends State<InterestSelectionScreen> {
       print("Error saving interests: $e");
     } finally {
       setState(() {
-        isLoading = false; // Hide loading indicator
+        isLoading = false;
       });
     }
   }
+  Future<String> createDynamicLink(String uid) async {
+    final String longDynamicLink = Uri.parse(
+        "https://newsletterapp.page.link/?" // Your Firebase Dynamic Link domain
+            "link=https://newsletterapp.com/news?uid=$uid" // Deep link with UID
+            "&apn=com.example.news_letter_app" // Android Package
+            "&ibi=com.example.newsLetterApp" // iOS Bundle ID
+    ).toString();
+
+    return longDynamicLink;
+  }
   Future<void> sendVerificationEmail(User user) async {
+    String dynamicLink = await createDynamicLink(user.uid);
     ActionCodeSettings actionCodeSettings = ActionCodeSettings(
-      url: "https://newsletterapp.page.link/start?uid=${user.uid}",
+      url:dynamicLink,
       handleCodeInApp: true,
       androidInstallApp: true,
       androidMinimumVersion: "1",
-      androidPackageName: "com.example.newsletterapp",
-      iOSBundleId: "com.example.newsletterapp",
+      androidPackageName: "com.example.news_letter_app",
+      iOSBundleId: "com.example.news_letter_app",
     );
 
     try {

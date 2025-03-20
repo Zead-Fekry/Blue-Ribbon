@@ -11,9 +11,9 @@ class GetAllNews
 
   GetAllNews({required this.repository});
 
-  Future<Either<Failure, List<NewsArticle>>> call(String interest) async
+  Future<Either<Failure, List<NewsArticle>>> call(List<String> interests) async
   {
-    return await repository.gelAllNews(interest);
+    return await repository.gelAllNews(interests);
   }
 
 }

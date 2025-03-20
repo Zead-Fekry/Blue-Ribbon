@@ -15,10 +15,10 @@ class NewsRepositoryImpl implements NewsRepository
   NewsRepositoryImpl({required this.newsRemoteDatasource});
 
   @override
-  Future<Either<Failure, List<NewsArticle>>> gelAllNews(String interest) async {
+  Future<Either<Failure, List<NewsArticle>>> gelAllNews(List<String> interests) async {
 
     try {
-      final RemoteNews = await newsRemoteDatasource.getAllNews(interest);
+      final RemoteNews = await newsRemoteDatasource.getAllNews(  interests);
       return Right(RemoteNews);
     } on ServerException {
       return left(ServerFailure());

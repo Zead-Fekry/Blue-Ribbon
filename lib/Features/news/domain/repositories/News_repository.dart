@@ -4,6 +4,6 @@ import 'package:news_letter_app/core/error/failures.dart';
 
 abstract class NewsRepository
 {
-Future<Either<Failure,List<NewsArticle>>> gelAllNews(String interest);
+Future<Either<Failure,List<NewsArticle>>> gelAllNews(List<String> interests);
 
 }

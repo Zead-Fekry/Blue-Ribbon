@@ -2,12 +2,17 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:news_letter_app/Features/news/presentation/manager/news_cubit.dart';
 import 'package:shimmer/shimmer.dart';
+import '../../../../core/routing/routes.dart';
+import '../../../../core/styles/colors/app_colors.dart';
+import '../Widgets/profile.dart';
 import '/injection_container.dart' as di;
 import '../Widgets/NewsListWidget.dart';
 
 class NewsScreen extends StatefulWidget {
-  final String interest;
-  const NewsScreen({super.key, required this.interest});
+  final List<String> interests;
+  final String? UserId;
+
+  const NewsScreen({super.key, required this.interests, required this.UserId});
 
   @override
   State<NewsScreen> createState() => _NewsScreenState();
@@ -17,14 +22,39 @@ class _NewsScreenState extends State<NewsScreen> {
   @override
   void initState() {
     super.initState();
-    NewsCubit.get(context).getAllNewsOrRefresh(interest: widget.interest);
+    NewsCubit.get(context).getAllNewsOrRefresh(interests: widget.interests);
   }
 
   @override
   Widget build(BuildContext context) {
     final cubit = NewsCubit.get(context);
     return Scaffold(
-      appBar: AppBar(title: Text("Latest News")),
+      appBar: AppBar(
+        leading: IconButton(
+            onPressed: () => Navigator.pushNamedAndRemoveUntil(
+                  context,
+                  Routes.loginScreen,
+                  (route) => false,
+                ),
+            icon: Icon(Icons.logout)),
+        title: Row(
+          children: [
+            Text("Latest News"),
+            IconButton(
+                onPressed: () => {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => Profile(
+                                  Userid: widget.UserId,
+                                )),
+                      )
+                    },
+                icon: Icon(Icons.person))
+          ],
+        ),
+        backgroundColor: AppColors.mainBlue,
+      ),
       body: Padding(
         padding: const EdgeInsets.all(10.0),
         child: BlocBuilder<NewsCubit, NewsState>(
@@ -33,12 +63,12 @@ class _NewsScreenState extends State<NewsScreen> {
               return _buildShimmerList();
             } else if (state is LoadedNewsState) {
               return RefreshIndicator(
-                onRefresh: () => _onRefresh(context, cubit, widget.interest),
+                onRefresh: () => _onRefresh(context, cubit, widget.interests),
                 child: NewsListWidget(news: state.news),
               );
             } else if (state is ErrorNewsState) {
               return RefreshIndicator(
-                onRefresh: () => _onRefresh(context, cubit, widget.interest),
+                onRefresh: () => _onRefresh(context, cubit, widget.interests),
                 child: Center(
                   child: Text(
                     state.message,
@@ -75,32 +105,12 @@ class _NewsScreenState extends State<NewsScreen> {
     );
   }
 
-  Future<void> _onRefresh(BuildContext context, NewsCubit cubit, String interest) async {
+  Future<void> _onRefresh(
+      BuildContext context, NewsCubit cubit, List<String> interests) async {
     WidgetsBinding.instance.addPostFrameCallback((_) {
       if (context.mounted) {
-        cubit.getAllNewsOrRefresh(interest: interest);
+        cubit.getAllNewsOrRefresh(interests: interests);
       }
     });
-  }
-}
-Future<void> main()
-async {
-  WidgetsFlutterBinding.ensureInitialized();
-  await di.init();
-  runApp(MyApp2(interest: "Teszxczxla",));
-}
-
-class MyApp2 extends StatefulWidget {
-  final String interest;
-  const MyApp2({super.key, required this.interest});
-
-  @override
-  State<MyApp2> createState() => _MyApp2State();
-}
-
-class _MyApp2State extends State<MyApp2> {
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(home: MultiBlocProvider(providers: [ BlocProvider(create: (_) => di.sl<NewsCubit>()),], child:NewsScreen(interest:widget.interest,) ));
   }
 }

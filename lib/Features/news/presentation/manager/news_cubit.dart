@@ -15,10 +15,10 @@ class NewsCubit extends Cubit<NewsState> {
   NewsCubit({required this.getAllNews}) : super(NewsInitial());
 
 static NewsCubit get(context) =>BlocProvider.of(context);
-Future<void> getAllNewsOrRefresh({required String interest})
+Future<void> getAllNewsOrRefresh({required List<String> interests})
 async {
     emit(LoadingNewsState());
-    final News = await getAllNews.call(interest);
+    final News = await getAllNews.call(interests);
     emit(_mapFailureOrnewsToState(News));
 
 }
@@ -29,7 +29,7 @@ async {
         return ErrorNewsState(message: _mapFailureToMessage(failure));
       },
           (news) {
-          // ✅ Append without resetting list
+
         return LoadedNewsState(news:news );
       },
     );
