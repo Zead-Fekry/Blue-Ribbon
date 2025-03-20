@@ -1,0 +1,54 @@
+{
+  "project_info": {
+    "project_number": "973215079144",
+    "project_id": "blueribbon-1371a",
+    "storage_bucket": "blueribbon-1371a.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:973215079144:android:a9f4bd97740650e0d2075d",
+        "android_client_info": {
+          "package_name": "com.example.news_letter_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "973215079144-gj3t93jg0cekvm5tla3g5d6054sd0odh.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.news_letter_app",
+            "certificate_hash": "9f14e915311bf8acd5d657f3a27617204f8cc500"
+          }
+        },
+        {
+          "client_id": "973215079144-0i9u0vu9g1eds1l0bbcl9ja9jvh1s81q.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAYNURKG_0KYsu_sFf_INkGcPgIJomwC4o"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "973215079144-0i9u0vu9g1eds1l0bbcl9ja9jvh1s81q.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "973215079144-au4434jltt715cuikm87v5fr3vc7uucv.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.newsLetterApp"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
