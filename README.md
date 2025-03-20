@@ -31,6 +31,12 @@ This app integrates **Firebase** for authentication, database storage, and deep 
 | **Content Fetching** | NewsAPI   |
 
 ---
+## 📸 Screenshots  
+
+im so sorry for not showing any comments becuase i was working on another branch and then merge it : 
+![image](https://github.com/user-attachments/assets/01839776-7663-4493-a897-c4030b8b63db)
+
+
 
 ## 📸 Screenshots  
 
